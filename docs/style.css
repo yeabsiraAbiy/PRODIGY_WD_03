@@ -1,0 +1,466 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff8f92 , #fcb4a1 );
+    overflow: hidden;
+}
+
+/* Landing page styling */
+.landing-page {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 2px 3px 6px rgba(255, 255, 255, 0.8);
+}
+
+.landing-page h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-family: 'Kaushan Script', cursive;
+}
+
+.landing-page button {
+    background-color:  rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.8); 
+    border: none;
+    color: #a1503a;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.landing-page button:hover {
+    background-color: #fcb4a1; /* Adjusted color */
+    transform: scale(1.05);
+    color: #ffffff;
+}
+
+/* Game container */
+.game-container {
+    display: none;
+    text-align: center;
+}
+
+.game-container{
+    color: rgb(255, 255, 255);
+}
+.game-status {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #444;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Tic-Tac-Toe grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 10px;
+    margin: 20px auto;
+}
+
+.grid div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    background: rgba(0, 0, 0, 0.1);
+    border: 2px solid #333;
+    font-size: 2.5rem;
+    color: #333;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.grid .cell {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid #f7b19d;
+    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+    color: #ffffff;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+.grid .cell.winner {
+    background: rgba(255, 255, 255, 0.5);
+    color: #ebe7e2;
+    animation: pulse 0.5s ease-in-out infinite;
+}
+
+.grid .cell:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+/* Winning cell highlight */
+.grid div.winner {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    animation: pulse 0.5s ease-in-out infinite;
+}
+
+.grid div:hover {
+    background: rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.x {
+    color: #611868 !important;
+    font-weight: bold;
+    animation: scaleUp 0.3s ease-in-out;
+}
+
+.o {
+    color:#a12a52  !important;
+    font-weight: bold;
+    animation: scaleUp 0.3s ease-in-out;
+}
+
+/* Button for reset */
+.reset-button {
+    background-color:  rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.8); 
+    border: none;
+    color: #a1503a;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.reset-button:hover {
+    background-color: #fcb4a1;
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+/* Game container overlay effect */
+.game-container .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.game-status {
+    font-size: 24px; 
+    text-align: center;
+}
+
+.game-status.winner {
+    font-size: 48px;  
+    font-weight: bold;
+    color: #e96d71;  
+    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.7);  
+    transition: font-size 0.3s ease;  
+}
+
+.game-status.draw {
+    margin: 5px;
+    font-size: 36px;  
+    font-weight: bold;
+    color: #e96d71;  
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.6);  
+}
+
+.back-button {
+    background-color: #e96d71;
+    color: white;
+    border: none;
+    padding: 13px 24px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 15px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #e66165;
+    color: #ffffff;
+    transform: translateY(-5px);
+}
+/* Animation keyframes */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(0.8);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Phone Portrait Styles */
+@media (max-width: 375px) {
+    .landing-page {
+        padding: 20px;
+        width: 85%;
+    }
+
+    .landing-page h1 {
+        font-size: 1.5rem;
+    }
+
+    .landing-page button {
+        font-size: 1.2rem;
+        padding: 10px 20px;
+    }
+
+    .game-container h1 {
+        font-size: 1.5rem;
+    }
+
+    .game-status {
+        font-size: 1rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(3, 80px);
+        grid-template-rows: repeat(3, 80px);
+        gap: 10px;
+    }
+
+    .grid .cell {
+        width: 80px;
+        height: 80px;
+        font-size: 1.5rem;
+    }
+
+    .reset-button {
+        font-size: 1.2rem;
+        padding: 10px 20px;
+    }
+    .back-button {
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        
+    }
+}
+
+/* Tablet Portrait Styles */
+@media (min-width: 376px) and (max-width: 744px) {
+    .landing-page {
+        padding: 27px;
+        width: 80%;
+    }
+
+    .landing-page h1 {
+        font-size: 2.5rem;
+    }
+
+    .landing-page button {
+        font-size: 1rem;
+        padding: 15px 25px;
+    }
+
+    .game-container h1 {
+        font-size: 2.3rem;
+    }
+
+    .game-status {
+        font-size: 2.0rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(3, 90px);
+        grid-template-rows: repeat(3, 90px);
+        gap: 10px;
+    }
+
+    .grid .cell {
+        width: 90px;
+        height: 90px;
+        font-size: 2.0rem;
+    }
+
+    .reset-button {
+        font-size: 1.3rem;
+        padding: 12px 22px;
+    }
+    .back-button {
+        padding: 12px 22px;
+        font-size: 1.3rem;
+        
+    }
+}
+
+/* Phone Landscape Styles */
+@media (min-width: 745px) and (max-width: 812px) {
+    .landing-page {
+        padding: 33px;
+        
+    }
+
+    .landing-page h1 {
+        font-size: 2.8rem;
+    }
+
+    .landing-page button {
+        font-size: 1.3rem;
+        padding: 13px 25px;
+    }
+
+    .game-container h1 {
+        font-size: 2.6rem;
+    }
+
+    .game-status {
+        font-size: 2.4rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(3, 100px);
+        grid-template-rows: repeat(3, 100px);
+        gap: 14px;
+    }
+
+    .grid .cell {
+        width: 100px;
+        height: 100px;
+        font-size: 2.6rem;
+    }
+
+    .reset-button {
+        font-size: 1.4rem;
+        padding: 13px 23px;
+    }
+    .back-button {
+        padding: 13px 23px;
+        font-size: 1.4rem;
+        
+    }
+}
+
+/* Tablet Landscape Styles */
+@media (min-width: 813px) and (max-width: 1133px) {
+    .landing-page {
+        padding: 38px;
+        width: 70%;
+    }
+
+    .landing-page h1 {
+        font-size: 3rem;
+    }
+
+    .landing-page button {
+        font-size: 1.4rem;
+        padding: 15px 28px;
+    }
+
+    .game-container h1 {
+        font-size: 2.8rem;
+    }
+
+    .game-status {
+        font-size: 2.5rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(3, 100px);
+        grid-template-rows: repeat(3, 100px);
+        gap: 15px;
+    }
+
+    .grid .cell {
+        width: 100px;
+        height: 100px;
+        font-size: 2.5rem;
+    }
+
+    .reset-button {
+        font-size: 1.4rem;
+        padding: 14px 28px;
+    }
+    .back-button {
+        padding: 14px 28px;
+        font-size: 1.4rem;
+        
+    }
+}
+
+/* Desktop Styles */
+@media (min-width: 1134px) and (max-width: 1440px) {
+    .landing-page {
+        padding: 45px;
+    }
+
+    .landing-page h1 {
+        font-size: 3rem;
+    }
+
+    .landing-page button {
+        font-size: 1.5rem;
+        padding: 12px 28px;
+    }
+
+    .game-container h1 {
+        font-size: 3rem;
+    }
+
+    .game-status {
+        font-size: 2.3rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(3, 90px);
+        grid-template-rows: repeat(3, 90px);
+        gap: 10px;
+    }
+
+    .grid .cell {
+        width: 90px;
+        height: 90px;
+        font-size: 2.5rem;
+    }
+
+    .reset-button {
+        font-size: 1.3rem;
+        padding: 12px 25px;
+    }
+}
+
+
+
+
